@@ -1,0 +1,156 @@
+<div class="mainContent">
+  <mat-toolbar class="toolbar">
+    <span class="toolbarTitle">Track my Run</span>
+  </mat-toolbar>
+  <div class="mainForm">
+    <h3 class="title">Create Account</h3>
+    <mat-stepper [linear]="true" #stepper class="matStepper">
+      <mat-step [stepControl]="createUserForm">
+        <form [formGroup]="createUserForm">
+          <ng-template matStepLabel>About you</ng-template>
+          <div class="firstPartForm">
+            <mat-form-field>
+              <mat-label>First Name:</mat-label>
+              <input type="text" matInput formControlName="firstName" />
+              <mat-error
+                class="matErrors"
+                *ngIf="firstName?.hasError('required') && firstName?.touched"
+              >
+                First Name is missing.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Last Name:</mat-label>
+              <input type="text" matInput formControlName="lastName" />
+              <mat-error
+                class="matErrors"
+                *ngIf="lastName?.hasError('required') && lastName?.touched"
+              >
+                Last Name is missing.
+              </mat-error>
+            </mat-form-field>
+
+            <div formArrayName="additionalNames" class="additionalNameContent">
+              <button
+                mat-button
+                (click)="addAdditionalName()"
+                class="additionalNameBtn"
+              >
+                + Additional Names
+              </button>
+              <ng-container
+                *ngFor="
+                  let nameInputs of additionalNames().controls;
+                  let i = index
+                "
+                [formGroupName]="i"
+              >
+                <div class="additionalNameInput">
+                  <mat-form-field class="nameField">
+                    <mat-label>Name:</mat-label>
+                    <input type="text" matInput formControlName="name" />
+                  </mat-form-field>
+                  <button
+                    mat-icon-button
+                    (click)="removeAdditionalName(i)"
+                    class="deleteNameBtn"
+                  >
+                    <span class="material-symbols-outlined"> delete </span>
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+
+            <!-- <mat-form-field class="genderDropDown" appearance="fill">
+              <mat-label>Gender:</mat-label>
+              <mat-select disableOptionCentering formControlName="gender">
+                <mat-option *ngFor="let gender of genders" [value]="gender">
+                  {{ gender }}
+                </mat-option>
+              </mat-select>
+              <mat-error
+                class="matErrors"
+                *ngIf="
+                  genderInput?.hasError('required') && genderInput?.touched
+                "
+              >
+                Please select a gender.
+              </mat-error>
+            </mat-form-field> -->
+
+            <mat-radio-group formControlName="gender" class="genderRadios">
+              <mat-radio-button *ngFor="let gender of genders" [value]="gender">
+                {{ gender }}
+              </mat-radio-button>
+              <mat-error class="matErrors" *ngIf="noGender">
+                Please select a gender.
+              </mat-error>
+            </mat-radio-group>
+
+            <!-- POSSIBLY HAVE THIS SO YOU CAN SELECT YOUR FAVOURITE BRANDS RATHER THAN JUST ONE? -->
+            <mat-form-field class="brandDropDown" appearance="fill">
+              <mat-label>Product Brand:</mat-label>
+              <mat-select
+                disableOptionCentering
+                formControlName="favouriteBrands"
+              >
+                <mat-option *ngFor="let brand of brands" [value]="brand">
+                  {{ brand }}
+                </mat-option>
+              </mat-select>
+              <mat-error
+                class="matErrors"
+                *ngIf="
+                  favouriteBrands?.hasError('required') &&
+                  favouriteBrands?.touched
+                "
+              >
+                Please select a brand.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="buttons">
+            <button
+              [disabled]="createUserForm.invalid"
+              mat-raised-button
+              color="primary"
+              type="submit"
+              (click)="onSubmit(createUserForm.value)"
+            >
+              Save
+            </button>
+            <button
+              class="resetBtn"
+              mat-raised-button
+              color="primary"
+              (click)="reset($event)"
+            >
+              Reset
+            </button>
+          </div>
+          <div>
+            <button mat-button (click)="nextStep(stepper)">Confirm</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Running info</ng-template>
+        <form>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Review</ng-template>
+        <p>You are now done.</p>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div>

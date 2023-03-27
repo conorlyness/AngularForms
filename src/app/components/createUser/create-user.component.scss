@@ -1,0 +1,87 @@
+.mainContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.toolbar {
+  top: 0;
+  position: absolute;
+  background-color: #673ab7;
+  .toolbarTitle {
+    color: white;
+  }
+}
+
+.mainForm {
+  box-shadow: rgba(76, 175, 224, 0.705) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  padding: 15px;
+  min-width: 450px;
+  min-height: 450px;
+  max-width: 750px;
+  max-height: 700px;
+  // margin-top: 70px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.matStepper {
+  min-width: 450px;
+  min-height: 450px;
+  max-width: 750px;
+  max-height: 860px;
+}
+
+.title {
+  margin-top: 10px;
+  text-align: center;
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.firstPartForm {
+  display: inline-grid;
+  width: -webkit-fill-available;
+  margin-left: 30px;
+  margin-right: 30px;
+  input {
+    margin-bottom: 5px;
+  }
+}
+
+.buttons {
+  text-align: center;
+  .resetBtn {
+    margin-left: 10px;
+  }
+}
+
+.additionalNameContent {
+  padding-bottom: 15px;
+}
+
+.additionalNameBtn {
+  margin-bottom: 15px;
+}
+
+.additionalNameInput {
+  width: 342px;
+}
+
+.nameField {
+  width: 80%;
+}
+
+.deleteNameBtn {
+  margin-left: 5px;
+}
+
+.genderRadios {
+  margin-bottom: 15px;
+}
+
+::ng-deep .mat-mdc-form-field-error-wrapper {
+  padding: 0 !important;
+}
